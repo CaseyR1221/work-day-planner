@@ -1,13 +1,19 @@
 // Display today's day and date
-let currentDate = moment().format('dddd, MMM Do YYYY');
-$("#currentDay").html(currentDate);
+const timeStamp =() => {
+    let currentDate = moment().format('MMMM Do YYYY, h:mm:ss a');
+    $("#currentDay").html(currentDate);
+}
+
+setInterval(timeStamp, 1000);
 
 $(document).ready(() => {
-    // saveBtn click listener 
-    $(".saveBtn").on("click", () => {
+    // click listener for save button
+    $(".saveBtn").on("click", (event) => {
         // Get nearby values of the description in JQuery
-        let text = $(this).siblings(".description").val();
-        let time = $(this).parent().attr("id");
+        let text = $(event.currentTarget).siblings(".description").val();
+        console.log(text);
+        let time = $(event.currentTarget).parent().attr("id");
+        console.log(time);
         // Save text in local storage
         localStorage.setItem(time, text);
     })
@@ -24,19 +30,19 @@ $(document).ready(() => {
 
             //To check the time and add the classes for background indicators
             if (blockTime < currentTime) {
-                $(this).removeClass("future");
-                $(this).removeClass("present");
-                $(this).addClass("past");
+                $(element).removeClass("future");
+                $(element).removeClass("present");
+                $(element).addClass("past");
             }
             else if (blockTime === currentTime) {
-                $(this).removeClass("past");
-                $(this).removeClass("future");
-                $(this).addClass("present");
+                $(element).removeClass("past");
+                $(element).removeClass("future");
+                $(element).addClass("present");
             }
             else {
-                $(this).removeClass("present");
-                $(this).removeClass("past");
-                $(this).addClass("future");
+                $(element).removeClass("present");
+                $(element).removeClass("past");
+                $(element).addClass("future");
 
             }
         })
@@ -53,5 +59,6 @@ $(document).ready(() => {
     $("#hour-16 .description").val(localStorage.getItem("hour-16"));
     $("#hour-17 .description").val(localStorage.getItem("hour-17"));
 
+    
     timeTracker();
 })

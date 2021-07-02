@@ -21,6 +21,13 @@ textarea {
   border-bottom: 10px solid black;
 }
 
+.hour-style {
+  background-color: #0a4d52;
+  color: white;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
 .description {
   white-space: pre-wrap;
 }
