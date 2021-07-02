@@ -11,24 +11,18 @@ $(document).ready(() => {
     $(".saveBtn").on("click", (event) => {
         // Get nearby values of the description in JQuery
         let text = $(event.currentTarget).siblings(".description").val();
-        console.log(text);
         let time = $(event.currentTarget).parent().attr("id");
-        console.log(time);
-        // Save text in local storage
-        localStorage.setItem(time, text);
+        
+        localStorage.setItem(time, text); // store values in local storage
     })
    
     let timeTracker = () => {
-        //get current number of hours.
-        let currentTime = moment().hour();
-        console.log(currentTime);
+        let currentTime = moment().hour(); // the current hour
 
-        // loop over time blocks
         $(".time-block").each((index, element) => {
-            let blockTime = parseInt($(element).attr("id").split("hour-")[1]);
-            console.log(blockTime);
+            let blockTime = parseInt($(element).attr("id").split("hour-")[1]); // hour of the current time block
 
-            //To check the time and add the classes for background indicators
+            // adds the appropriate background color to the time block depending on the current time
             if (blockTime < currentTime) {
                 $(element).removeClass("future");
                 $(element).removeClass("present");
@@ -48,7 +42,7 @@ $(document).ready(() => {
         })
     }
 
-    // Get item from local storage if any
+    // pulls any stored values from the time blocks
     $("#hour-9 .description").val(localStorage.getItem("hour-9"));
     $("#hour-10 .description").val(localStorage.getItem("hour-10"));
     $("#hour-11 .description").val(localStorage.getItem("hour-11"));
